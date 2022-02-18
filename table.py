@@ -17,6 +17,18 @@ def repeated(char, N):
         x = x + char
         i = i + 1
     return x
+def padded(x,width):
+    '''
+    This function checks the how many digits are in the 
+    :param x:
+    :param width:
+    :return:
+    '''
+    number = str(x)
+    answer = number
+    if len(number) > width:
+        answer = repeated("*",width)
+    return answer
 def power(base, exponent):
     '''
     This function solves for the base to the exponent power
@@ -38,12 +50,13 @@ def print_row(n, max_power, column_width):
     :param n: is the number you want to raise
     :param max_power: is the max number you want to raise to
     :param column_width: the length of each column
-    :return: 
+    :return:
     '''
     i = 1
     while i <= max_power:
         x = power(n,i)
-        y = 1
+        answer = padded(x,column_width)
+        '''
         if x>10 and x<100:
             y= 2
         elif x>100 and x<1000:
@@ -53,11 +66,11 @@ def print_row(n, max_power, column_width):
         if y >column_width:
             space=""
             x = repeated("*",column_width)
-        else:
-            z = column_width-y
-            space = repeated(" ",z)
+        else:'''
+        z = column_width-len(answer)
+        space = repeated(" ",z)
         print("|"+space,end="")
-        print(x,end="")
+        print(answer,end="")
         i=i+1
     print("|")
 def print_table(max_value,max_power,column_width):
@@ -65,8 +78,8 @@ def print_table(max_value,max_power,column_width):
     This is going to use the three previous functions to print the exponent table
     :param max_value: is the max number you want to be raised
     :param max_power: is the number you want to raise the numbers two
-    :param column_width: is the size of each column 
-    :return: 
+    :param column_width: is the size of each column
+    :return:
     '''
     length = (column_width*max_power)+(max_power+1)
     print(repeated("-",length))
@@ -75,5 +88,8 @@ def print_table(max_value,max_power,column_width):
         print_row(i,max_power,column_width)
         i = i+1
     print(repeated("=", length))
-print_table(4,3,2)
-print_table(6,4,2)
+def main():
+    print_table(4, 3, 2)
+    print_table(6, 4, 2)
+
+main()
